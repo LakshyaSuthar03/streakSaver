@@ -1,5 +1,5 @@
 import { Octokit } from '@octokit/rest';
-import schedule from 'node-schedule';
+// import schedule from 'node-schedule';
 import dotenv from 'dotenv';
 
 
@@ -57,9 +57,8 @@ async function updateReadme() {
   }
 }
 
-
-
-const job = schedule.scheduleJob('10 * * * * *', function(){
-    updateReadme()
-  });
+updateReadme()
+// const job = schedule.scheduleJob('10 * * * * *', function(){
+//     updateReadme()
+//   });
 
