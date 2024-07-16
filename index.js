@@ -9,7 +9,7 @@ const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,  // Replace with your GitHub token
 });
 
-export async function getReadmeSha(owner, repo, path) {
+ async function getReadmeSha(owner, repo, path) {
   try {
     const response = await octokit.repos.getContent({
       owner,
