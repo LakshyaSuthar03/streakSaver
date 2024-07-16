@@ -1,8 +1,8 @@
 import { Octokit } from '@octokit/rest';
-// import schedule from 'node-schedule';
 import dotenv from 'dotenv';
-
-
+import express from 'express'; 
+const app = express();
+const port = process.env.PORT || 3000;
 dotenv.config();
 // Initialize Octokit
 const octokit = new Octokit({
@@ -58,7 +58,19 @@ export async function updateReadme() {
 }
 
 
+
 // const job = schedule.scheduleJob('10 * * * * *', function(){
 //     updateReadme()
 //   });
+app.get('/', (req, res) => {
+  try {
+    updateReadme()
+    res.status(200).send('file updated');
+  } catch (error) {
+    res.status(500).send('server error');
+  }
+})
 
+app.listen(port, () => {
+  console.log(`server running on port ${port}`);
+})
