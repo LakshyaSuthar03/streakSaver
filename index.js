@@ -22,8 +22,7 @@ export async function getReadmeSha(owner, repo, path) {
     throw error;
   }
 }
-
-export async function updateReadme() {
+ async function updateReadme() {
   try {
     const owner = 'lakshyasuthar';
     const repo = 'streakSaver';
