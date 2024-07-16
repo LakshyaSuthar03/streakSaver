@@ -9,7 +9,7 @@ const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,  // Replace with your GitHub token
 });
 
-async function getReadmeSha(owner, repo, path) {
+export async function getReadmeSha(owner, repo, path) {
   try {
     const response = await octokit.repos.getContent({
       owner,
@@ -23,7 +23,7 @@ async function getReadmeSha(owner, repo, path) {
   }
 }
 
-async function updateReadme() {
+export async function updateReadme() {
   try {
     const owner = 'lakshyasuthar';
     const repo = 'streakSaver';
@@ -57,7 +57,7 @@ async function updateReadme() {
   }
 }
 
-updateReadme()
+
 // const job = schedule.scheduleJob('10 * * * * *', function(){
 //     updateReadme()
 //   });
