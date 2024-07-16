@@ -4,6 +4,7 @@ import express from 'express';
 import axios from 'axios';
 const app = express();
 const port = process.env.PORT || 3000;
+const date = new Date().toLocaleTimeString();
 dotenv.config();
 // Initialize Octokit
 const octokit = new Octokit({
@@ -28,7 +29,7 @@ const octokit = new Octokit({
     const owner = 'lakshyasuthar';
     const repo = 'streakSaver';
     const path = 'README.md';
-    const newContent = `City:Vadodara, weather ${data.text}, day:${data.day}` || "Readme Updated!";  // New content for the README.md file
+    const newContent = `City:Vadodara, weather ${data.text}, day:${data.day}, UpdatedAt:${date}` || "Readme Updated!";  // New content for the README.md file
     const encodedContent = Buffer.from(newContent).toString('base64');  // Base64 encode the new content
 
     // Get the current README file's SHA
