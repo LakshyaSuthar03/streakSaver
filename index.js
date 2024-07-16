@@ -1,6 +1,8 @@
 import { Octokit } from '@octokit/rest';
 import schedule from 'node-schedule';
 import dotenv from 'dotenv';
+
+
 dotenv.config();
 // Initialize Octokit
 const octokit = new Octokit({
@@ -61,7 +63,7 @@ rule.hour = 17;
 rule.minute = 0;
 
 
-const job = schedule.scheduleJob('17 * * * *', function(){
+const job = schedule.scheduleJob('*/17 * * * * *', function(){
     updateReadme()
     // console.log('The answer to life, the universe, and everything!');
 });
