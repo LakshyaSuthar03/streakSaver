@@ -61,7 +61,8 @@ rule.hour = 17;
 rule.minute = 0;
 
 
-const job = schedule.scheduleJob('12 12 * * *', function(){
+const job = schedule.scheduleJob('20 12 * * *', function(){
     updateReadme()
+    // console.log('The answer to life, the universe, and everything!');
 });
 
