@@ -57,14 +57,9 @@ async function updateReadme() {
   }
 }
 
-const rule = new schedule.RecurrenceRule();
-rule.dayOfWeek = [0, new schedule.Range(4, 6)];
-rule.hour = 17;
-rule.minute = 0;
 
 
-const job = schedule.scheduleJob('*/17 * * * * *', function(){
+const job = schedule.scheduleJob('10 * * * * *', function(){
     updateReadme()
-    // console.log('The answer to life, the universe, and everything!');
-});
+  });
 
