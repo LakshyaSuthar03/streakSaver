@@ -1,6 +1,7 @@
 import { Octokit } from '@octokit/rest';
 import dotenv from 'dotenv';
 import express from 'express'; 
+import axios from 'axios';
 const app = express();
 const port = process.env.PORT || 3000;
 dotenv.config();
@@ -22,12 +23,12 @@ const octokit = new Octokit({
     throw error;
   }
 }
- async function updateReadme() {
+ async function updateReadme(data) {
   try {
     const owner = 'lakshyasuthar';
     const repo = 'streakSaver';
     const path = 'README.md';
-    const newContent = 'Streak Saver Commits';  // New content for the README.md file
+    const newContent = `City:Vadodara, weather ${data.text}, day:${data.day}` || "Readme Updated!";  // New content for the README.md file
     const encodedContent = Buffer.from(newContent).toString('base64');  // Base64 encode the new content
 
     // Get the current README file's SHA
@@ -61,9 +62,23 @@ const octokit = new Octokit({
 // const job = schedule.scheduleJob('10 * * * * *', function(){
 //     updateReadme()
 //   });
-app.get('/', (req, res) => {
+const options = {
+  method: 'GET',
+  url: 'https://yahoo-weather5.p.rapidapi.com/weather',
+  params: {
+    location: 'vadodara',
+    format: 'json',
+    u: 'f'
+  },
+  headers: {
+    'x-rapidapi-key': process.env.RAPIDAPI_KEY,
+    'x-rapidapi-host': process.env.RAPIDAPI_HOST
+  }
+};
+app.get('/', async (req, res) => {
   try {
-    updateReadme()
+    const response = await axios.request(options)
+    updateReadme(response?.data?.forecasts[0])
     res.status(200).send('file updated');
   } catch (error) {
     res.status(500).send('server error');
